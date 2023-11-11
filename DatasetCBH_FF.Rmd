@@ -1,0 +1,30 @@
+---
+title: "Untitled"
+output: pdf_document
+date: "2023-11-06"
+---
+
+```{r setup, echo=FALSE}
+
+
+library(readxl)
+library(ggplot2)
+library(MASS)
+library(robustbase)
+library(knitr)
+
+data <-  read_excel("Dataset CBH_FINAL.xlsx"  )
+
+##question 1 - in different countries are models significantly 
+##different??
+
+## https://stats.oarc.ucla.edu/r/dae/robust-regression/
+
+data$Species<-as.factor(data$Species)
+data$Country<-as.factor(data$Country)
+outliers <- which(data$cbh > data$h)
+data <- data[-outliers,]
+
+kable( table(data$Species),caption="Species"  )
+```
+ 
